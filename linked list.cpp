@@ -35,21 +35,26 @@ node Newnode(string b, int c){
 
 void addToCombo(node &a, string b, int c){
     node p=a;
-    while(p!=NULL){
+    if(a==NULL){
+        a=Newnode(b,c);
+    }
+    else{
+    while(p->next!=NULL){
         p=p->next;
     }
     p->next=Newnode(b,c);
+    }
 }
 
 void showcombo(node a){
     while (a!= NULL){
         cout<<"\n"<<a->data.skillName;
-        cout<<" "<<a->data.manaCost;
+        cout<<"-"<<a->data.manaCost;
         a=a->next;
     }
-    if(a->next=NULL){
-        cout<<"end";
-    }
+    
+        cout<<"\n-------Ket thuc combo------";
+
 }
 
 int totalmana(node a){
@@ -63,26 +68,40 @@ int totalmana(node a){
 
 
 void removeLastSkill(node &a){
-    node truoc=NULL, sau=a;
-    if (a->next==NULL){
+    node p=a;
+    if (a==NULL){
+        cout<<"khong co skill nao de xoa";
+    }
+    else if(a->next==NULL){
         delete a;
     }
-    while (sau != NULL){
-        truoc->next=sau;
-        sau=sau->next;
-    }
-    truoc->next=NULL;
+    else{
+        while (p->next->next != NULL){
+            p=p->next;
+        }
+        delete p->next;
+        p->next=NULL;
+    } 
 }
 
 void excuteCombo(node &a){
-    node p=a;
-     while (a!= NULL){
-        while (p!=NULL){
-        p=p->next; 
-        } 
-        delete p;
-        p=a;}
-    delete a;
+    node p;
+    node tmp;
+    if(a==NULL){
+        cout<<"khong co combo";
+        return;
+    }
+    else if(a->next==NULL){
+        delete a;
+        return;
+    }
+    else{
+    while (a->next!= NULL){
+        tmp=a->next;
+        delete a;
+        a=tmp;
+    }
+}
 }
 int main(){
     int i=0;
@@ -99,6 +118,7 @@ int main(){
         cout<<"\n6. END";
         cout<<"\n chon:";
         cin>>i;
+        cin.ignore();
     switch (i)
     {
     case 1:
@@ -116,7 +136,7 @@ int main(){
         mana = totalmana(head);
         cout << "Tong mana: " << mana << endl;
         if (mana > 500) cout << "(!) Canh bao: Khong du mana!" << endl;
-         break;
+        break;
     case 4:
         removeLastSkill(head);
         cout << "Da xoa chieu cuoi." << endl;
@@ -129,7 +149,7 @@ int main(){
         cout << "Tam biet!" << endl;
         break;
     default:
-                cout << "Lua chon khong hop le!" << endl;
+            cout << "Lua chon khong hop le!" << endl;
         }
     }
     
