@@ -68,93 +68,18 @@ int totalmana(node a){
 
 
 void removeLastSkill(node &a){
-    node p=a;
-    if (a==NULL){
-        cout<<"khong co skill nao de xoa";
+    node truoc=NULL, sau=a;
+    if (a->next==NULL){
+        cout<<"Combo chi co 1 phan tu khong the xoa."
     }
-    else if(a->next==NULL){
-        delete a;
-        a=NULL;
+    while (sau != NULL){
+        truoc->next=sau;
+        sau=sau->next;
     }
-    else{
-        while (p->next->next != NULL){
-            p=p->next;
-        }
-        delete p->next;
-        p->next=NULL;
-    } 
+    truoc->next=NULL;
 }
 
-void excuteCombo(node &a){
-    node p;
-    node tmp;
-    if(a==NULL){
-        cout<<"khong co combo";
-        return;
-    }
-    else if(a->next==NULL){
-        delete a;
-        a=NULL;
-        return;
-    }
-    else{
-    while (a!= NULL){
-        tmp=a->next;
-        delete a;
-        a=tmp;
-    }
-}
-}
 int main(){
-    int i=0;
-    node head=NULL;
-    string name;
-    int mana;
-    while(i!=6){
-        cout<<"---MENU---";
-        cout<<"\n1. addcombo";
-        cout<<"\n2. showcombo";
-        cout<<"\n3. total mana";
-        cout<<"\n4. removelastskill";
-        cout<<"\n5. excutecombo";
-        cout<<"\n6. END";
-        cout<<"\n chon:";
-        cin>>i;
-        cin.ignore();
-    switch (i)
-    {
-    case 1:
-        cout << "Nhap ten skill: ";
 
-        getline(cin, name);
-        cout << "Nhap mana tieu ton: ";
-        cin >> mana;
-        addToCombo(head, name, mana);
-        break;
-    case 2:
-        showcombo(head);
-        break;
-    case 3:
-        mana = totalmana(head);
-        cout << "Tong mana: " << mana << endl;
-        if (mana > 500) cout << "(!) Canh bao: Khong du mana!" << endl;
-        break;
-    case 4:
-        removeLastSkill(head);
-        cout << "Da xoa chieu cuoi." << endl;
-        break;
-    case 5:
-        excuteCombo(head);
-        break;
-    case 6:
-        excuteCombo(head); // Giai phong truoc khi thoat
-        cout << "Tam biet!" << endl;
-        break;
-    default:
-            cout << "Lua chon khong hop le!" << endl;
-        }
-    }
-    
-    
 	return 0;
 }
