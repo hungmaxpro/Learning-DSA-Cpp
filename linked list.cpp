@@ -32,7 +32,6 @@ node Newnode(string b, int c){
     newnode->next=NULL;
     return newnode;
 }
-
 void addToCombo(node &a, string b, int c){
     node p=a;
     if(a==NULL){
